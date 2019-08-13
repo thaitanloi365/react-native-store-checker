@@ -43,6 +43,8 @@ class StoreChecker extends React.Component {
   static defaultProps = {
     title: "Update Available !",
     message: "The latest version of Rent My Wardrobe is available",
+    updateNowButtonText: "Update now",
+    updateLaterButtonText: "Later",
     isMandatory: false,
     isCheckOnResume: true,
     modalBackgroundColor: "rgba(35,36,38,0.8)",
@@ -70,7 +72,8 @@ class StoreChecker extends React.Component {
   };
 
   _handleAppStateChange = nextAppState => {
-    if (nextAppState === "active") {
+    const { updateLater, visible } = this.state;
+    if (nextAppState === "active" && updateLater == false && visible == false) {
       this._storeCheck();
     }
   };
@@ -225,14 +228,22 @@ class StoreChecker extends React.Component {
           {showContent && (
             <Animated.View style={[styles.container, animationType]}>
               {typeof title === "string" && title !== "" && <Text style={[styles.title, titleStyle]}>{title}</Text>}
-              <Text style={[styles.message, titleStyle]}>{title}</Text>
+              <Text style={[styles.message, messageStyle]}>{message}</Text>
               <View style={styles.row}>
                 {!isMandatory && (
-                  <TouchableOpacity style={[styles.inactiveButton, updateLaterButtonStyle]} onPress={this._updateLater}>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={[styles.inactiveButton, updateLaterButtonStyle]}
+                    onPress={this._updateLater}
+                  >
                     <Text style={[styles.inactiveButtonText, updateLaterButtonTextStyle]}>{updateLaterButtonText}</Text>
                   </TouchableOpacity>
                 )}
-                <TouchableOpacity style={[styles.activeButton, updateNowButtonStyle]} onPress={this._updateNow}>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={[styles.activeButton, updateNowButtonStyle]}
+                  onPress={this._updateNow}
+                >
                   <Text style={[styles.activeButtonText, updateNowButtonTextStyle]}>{updateNowButtonText}</Text>
                 </TouchableOpacity>
               </View>
@@ -258,7 +269,8 @@ const styles = StyleSheet.create({
     color: primaryColor
   },
   message: {
-    marginTop: 6,
+    marginTop: 16,
+    marginBottom: 30,
     fontSize: 14,
     color: slateColor
   },
@@ -266,7 +278,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+
+    marginBottom: 15
   },
   container: {
     alignItems: "center",
@@ -296,7 +310,7 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
   activeButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: "white",
     marginHorizontal: 20,
     marginVertical: 10
@@ -310,7 +324,7 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
   inactiveButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: slateColor,
     marginHorizontal: 20,
     marginVertical: 10

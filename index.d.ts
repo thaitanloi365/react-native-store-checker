@@ -6,7 +6,7 @@ declare module "react-native-store-checker" {
     latestVersion: string;
   }
   export interface StoreCheckerProps {
-    title: string;
+    title?: string;
     message: string;
     storeAppID: string;
     storeAppName: string;
@@ -25,4 +25,6 @@ declare module "react-native-store-checker" {
     updateNowButtonTextStyle?: StyleProp<TextStyle>;
     updateNowButtonText?: string;
   }
+
+  export default class StoreChecker extends React.Component<StoreCheckerProps, any> {}
 }
