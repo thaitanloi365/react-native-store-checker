@@ -1,0 +1,14 @@
+{
+  "name": "react-native-store-checker",
+  "version": "1.0.0",
+  "description": "Store version checker",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "typings": "index.d.ts",
+  "repository": "https://github.com/thaitanloi365/react-native-store-checker",
+  "author": "Loi",
+  "license": "MIT",
+  "dependencies": {
+    "react-native-version-check": "^3.3.0"
+  }
+}
