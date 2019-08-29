@@ -48,7 +48,7 @@ class StoreChecker extends React.Component {
     isMandatory: false,
     isCheckOnResume: true,
     modalBackgroundColor: "rgba(35,36,38,0.8)",
-    animationType: "scale",
+    animationType: "slide",
     storeAppID: "",
     storeAppName: ""
   };
@@ -178,7 +178,7 @@ class StoreChecker extends React.Component {
 
     const translateY = animatedScaleValue.interpolate({
       inputRange: [0, 0.5, 1],
-      outputRange: [-height, -height / 4, 0],
+      outputRange: [height, height / 4, 0],
       extrapolate: "clamp"
     });
     const opacity = animatedScaleValue.interpolate({
@@ -263,27 +263,27 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginHorizontal: 20,
+    marginHorizontal: 16,
     marginTop: 20,
     fontSize: 20,
-    color: primaryColor
+    color: primaryColor,
+    textAlign: "center"
   },
   message: {
     marginTop: 16,
     marginBottom: 30,
     fontSize: 14,
-    color: slateColor
+    color: slateColor,
+    marginHorizontal: 16
   },
 
   row: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-
     marginBottom: 15
   },
   container: {
-    alignItems: "center",
     width: dialogWidth,
     maxHeight: dialogHeight,
     overflow: "hidden",
@@ -299,7 +299,8 @@ const styles = StyleSheet.create({
         shadowRadius: 6
       }
     }),
-    borderRadius: 14
+    borderRadius: 14,
+    paddingHorizontal: 10
   },
   activeButton: {
     flex: 0.5,
